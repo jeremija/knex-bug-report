@@ -6,10 +6,10 @@ const knex = Knex({
   useNullAsDefault: true,
 })
 
-async function prepare (n) {
+async function prepare (rows) {
   await knex.raw('create table test(id bigint(20) primary key, name varchar(50))')
 
-  for (let i = 1; i < n; i++) {
+  for (let i = 1; i < rows; i++) {
     await knex.raw('insert into test (id, name) values (?, ?)', [i, 'name for ' + i])
   }
 }
@@ -22,9 +22,9 @@ async function benchmark (name, query) {
   return results
 }
 
-async function test (n = 10000) {
+async function test (rows = 10000) {
   console.log('preparing database...')
-  await prepare(n)
+  await prepare(rows)
 
   console.log('running benchmarks...')
   await benchmark('knex.raw()   ', knex.raw('select `id`, `name` from `test`'))
