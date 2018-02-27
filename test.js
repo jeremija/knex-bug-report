@@ -1,4 +1,5 @@
 const Knex = require('knex')
+const ROWS = parseInt(process.env.N) || 10000
 
 const knex = Knex({
   dialect: 'sqlite3',
@@ -22,7 +23,7 @@ async function benchmark (name, query) {
   return results
 }
 
-async function test (rows = 10000) {
+async function test (rows = ROWS) {
   console.log('preparing database...')
   await prepare(rows)
 
