@@ -1,7 +1,7 @@
 # Knex Bug Report
 
 This benchmark shows there is a big performance difference when using
-`knex.raw()` vs `knex.select(...).where(...)`.
+`knex.raw()` vs `knex.select(...).from(...)`.
 
 # Libraries
 
